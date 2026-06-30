@@ -398,6 +398,119 @@
     .trust-card h3 { font-size: 1rem; margin-bottom: 8px; }
     .trust-card p { font-size: 0.85rem; }
 
+    /* ── Circular Learning ───────────────────────── */
+    .loop-diagram {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 72px;
+      flex-wrap: wrap;
+    }
+
+    .loop-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      width: 200px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .loop-step:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-2px); }
+
+    .loop-step--accent { border-color: rgba(245,166,35,0.4); background: rgba(245,166,35,0.06); }
+
+    .loop-icon { font-size: 2rem; margin-bottom: 10px; }
+    .loop-label { font-size: 0.95rem; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+    .loop-step .loop-desc { font-size: 0.78rem; line-height: 1.55; color: var(--muted); }
+
+    .loop-arrow {
+      color: var(--accent);
+      font-size: 1.4rem;
+      font-weight: 300;
+      align-self: center;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+
+    .correction-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .correction-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .corr-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .corr-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .corr-tag--ai { background: rgba(138,139,147,0.15); color: var(--muted); }
+
+    .corr-retailer { font-size: 0.78rem; color: var(--muted); }
+
+    .corr-fields { padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+    .corr-field { display: flex; align-items: baseline; gap: 12px; font-size: 0.82rem; }
+    .corr-field-label { color: var(--muted); width: 72px; flex-shrink: 0; font-size: 0.75rem; }
+    .corr-field-value { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .corr-field--ok .corr-field-value { color: #4ade80; }
+    .corr-field--wrong .corr-field-value { color: var(--white); }
+
+    .strike { text-decoration: line-through; color: var(--muted); font-size: 0.78rem; }
+    .corr-arrow { color: var(--accent); font-size: 0.8rem; }
+    .corr-fix { color: var(--accent); font-weight: 600; font-size: 0.82rem; }
+
+    .corr-footer {
+      padding: 12px 18px;
+      border-top: 1px solid var(--border);
+      background: rgba(245,166,35,0.05);
+    }
+    .corr-learned { font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+
+    .cl-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .cl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .cl-point strong { display: block; font-size: 0.95rem; margin-bottom: 4px; color: var(--white); }
+    .cl-point p { font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .loop-diagram { gap: 8px; }
+      .loop-step { width: 140px; padding: 20px 14px; }
+      .loop-arrow { padding: 0 4px; font-size: 1rem; }
+      .correction-demo { grid-template-columns: 1fr; }
+    }
+
     /* ── Final CTA ────────────────────────────────── */
     .final-cta {
       background: linear-gradient(135deg, rgba(245,166,35,0.08) 0%, rgba(232,69,69,0.06) 100%);
@@ -621,6 +734,120 @@
           <div class="step-content">
             <h3>We alert you before it's too late</h3>
             <p>When a return window or warranty is about to expire, you get a reminder with pre-filled claim paperwork ready to send. One tap to act, not one afternoon of searching.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Circular Learning ────────────────────────── -->
+  <section class="section" id="learning">
+    <div class="container">
+      <div class="center" style="margin-bottom: 56px;">
+        <p class="eyebrow">Circular learning</p>
+        <h2 style="margin-top: 12px; max-width: 620px; margin-left: auto; margin-right: auto;">
+          The more you use it, the less you have to correct it.
+        </h2>
+        <p style="margin-top: 12px; max-width: 500px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">
+          Every time you fix something Keepr got wrong, it remembers. Your next receipt from the same retailer is already smarter.
+        </p>
+      </div>
+
+      <!-- Loop diagram -->
+      <div class="loop-diagram">
+        <div class="loop-step">
+          <div class="loop-icon">📸</div>
+          <div class="loop-label">Scan</div>
+          <div class="loop-desc">You snap a receipt. GPT-4o reads it and pulls out every field.</div>
+        </div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-step">
+          <div class="loop-icon">🔍</div>
+          <div class="loop-label">Review</div>
+          <div class="loop-desc">You see what Keepr found. Low-confidence fields are flagged for a quick check.</div>
+        </div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-step">
+          <div class="loop-icon">✏️</div>
+          <div class="loop-label">Correct</div>
+          <div class="loop-desc">Tap any field to fix it. Keepr logs the original and your correction side by side.</div>
+        </div>
+        <div class="loop-arrow">→</div>
+        <div class="loop-step loop-step--accent">
+          <div class="loop-icon">🧠</div>
+          <div class="loop-label">Learn</div>
+          <div class="loop-desc">Your correction feeds back into future scans from that retailer. It compounds.</div>
+        </div>
+      </div>
+
+      <!-- Correction card demo -->
+      <div class="correction-demo">
+        <div class="correction-card">
+          <div class="corr-header">
+            <span class="corr-tag corr-tag--ai">AI read</span>
+            <span class="corr-retailer">Best Buy receipt</span>
+          </div>
+          <div class="corr-fields">
+            <div class="corr-field corr-field--wrong">
+              <div class="corr-field-label">Product</div>
+              <div class="corr-field-value">
+                <span class="strike">Samsung TV 65</span>
+                <span class="corr-arrow">→</span>
+                <span class="corr-fix">Samsung 65" QLED QN65Q80C</span>
+              </div>
+            </div>
+            <div class="corr-field corr-field--ok">
+              <div class="corr-field-label">Price</div>
+              <div class="corr-field-value">$1,249.99 ✓</div>
+            </div>
+            <div class="corr-field corr-field--ok">
+              <div class="corr-field-label">Date</div>
+              <div class="corr-field-value">June 14, 2025 ✓</div>
+            </div>
+            <div class="corr-field corr-field--wrong">
+              <div class="corr-field-label">Warranty</div>
+              <div class="corr-field-value">
+                <span class="strike">1 year</span>
+                <span class="corr-arrow">→</span>
+                <span class="corr-fix">2 years</span>
+              </div>
+            </div>
+          </div>
+          <div class="corr-footer">
+            <span class="corr-learned">🧠 Got it. Next Best Buy scan will know this.</span>
+          </div>
+        </div>
+
+        <div class="correction-text">
+          <div class="stack">
+            <div class="cl-point">
+              <div class="cl-dot"></div>
+              <div>
+                <strong>You correct once.</strong>
+                <p>Fix a field Keepr misread. Takes 5 seconds.</p>
+              </div>
+            </div>
+            <div class="cl-point">
+              <div class="cl-dot"></div>
+              <div>
+                <strong>We remember for next time.</strong>
+                <p>That correction is stored against the retailer and product type.</p>
+              </div>
+            </div>
+            <div class="cl-point">
+              <div class="cl-dot"></div>
+              <div>
+                <strong>Accuracy improves automatically.</strong>
+                <p>After a few receipts from the same store, Keepr rarely needs correcting at all.</p>
+              </div>
+            </div>
+            <div class="cl-point">
+              <div class="cl-dot"></div>
+              <div>
+                <strong>You stay in control.</strong>
+                <p>View and delete every correction Keepr has stored under Settings → My Corrections.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

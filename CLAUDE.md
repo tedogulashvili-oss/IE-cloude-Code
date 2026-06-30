@@ -96,6 +96,36 @@ Fetch is about earning rewards for scanning receipts. Keepr is about protecting 
 
 ---
 
+## Circular Learning — Feedback Loop
+
+Keepr improves its extraction accuracy over time by learning from user corrections.
+
+### How it works
+
+1. **Extract** — GPT-4o parses the receipt and returns field values with confidence scores
+2. **Review** — User sees the extracted fields; low-confidence fields are highlighted for review
+3. **Correct** — User taps any field to edit it; the original AI value and the correction are both stored
+4. **Log** — Each correction is saved as a structured diff: `{ field, ai_value, corrected_value, receipt_type, retailer }`
+5. **Reinject** — Stored corrections for the same retailer/product category are injected as few-shot examples into the next extraction prompt
+6. **Improve** — Future scans of similar receipts benefit from prior corrections; accuracy compounds over time
+
+### Rules
+
+- Corrections only feed back into the user's own extraction context (no cross-user data sharing without consent)
+- A correction must differ meaningfully from the AI value before it is logged (ignore whitespace/case-only edits)
+- If the same field is corrected 3+ times for a given retailer, that pattern is promoted to a permanent few-shot example in that retailer's prompt context
+- The loop is visible to the user: a "Keepr has learned X corrections for this retailer" indicator builds trust
+- Never use corrections to infer pricing trends, purchase behaviour, or anything beyond improving extraction accuracy
+
+### UI behaviour
+
+- Extracted fields show a subtle confidence indicator (solid / dashed / dotted border = high / medium / low)
+- Low-confidence fields open in edit mode by default
+- After a correction is saved, a micro-confirmation: "Got it. We'll remember that for next time."
+- User can view and delete their correction history in Settings → My Corrections
+
+---
+
 ## Development Principles
 
 - Ship the smallest thing that saves the user money or time
